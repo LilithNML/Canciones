@@ -93,6 +93,7 @@ const letraLRC = `00:11.900 -> Here we go
 function mostrarLetraSincronizada() {
   const audio = document.getElementById('audio');
   const contenedor = document.getElementById('letra-container');
+  contenedor.innerHTML = '';  // limpiar por si se vuelve a iniciar
   const lineas = [];
 
   letraLRC.split('\n').forEach(l => {
