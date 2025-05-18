@@ -2,21 +2,18 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jump Up, Super Star!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Te amo</title>
   <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div id="pantalla-inicial" class="visible">
-    <div class="mensaje">
-      <h1>¡Vamos a saltar!</h1>
-      <p>Presiona el botón para escuchar <br><strong>Jump Up, Super Star!</strong></p>
-      <button id="startBtn">¡Reproducir!</button>
-    </div>
+  <div id="pantalla-inicial" class="pantalla">
+    <button id="startBtn" class="boton-rojo">Reproducir</button>
   </div>
 
-  <div id="pantalla-cancion" class="oculto">
-    <div id="letra-container"></div>
+  <div id="pantalla-cancion" class="pantalla oculto">
+    <div id="letra-container" class="letra-container"></div>
     <audio id="audio" src="jump-up-super-star.opus"></audio>
   </div>
 
