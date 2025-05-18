@@ -114,11 +114,19 @@ function mostrarLetraSincronizada() {
       const actual = lineas[i];
       const siguiente = lineas[i + 1];
       if (!siguiente || tiempoActual < siguiente.tiempo) {
-        lineas.forEach(l => l.elemento.classList.remove('activa'));
-        actual.elemento.classList.add('activa');
-        actual.elemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (!actual.elemento.classList.contains('activa')) {
+          lineas.forEach(l => l.elemento.classList.remove('activa'));
+          actual.elemento.classList.add('activa');
+          actual.elemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
         break;
       }
     }
   };
+
+  audio.onended = () => {
+    lineas.forEach(l => l.elemento.classList.remove('activa'));
+  };
 }
+
+document.getElementById('startBtn').addEventListener('click', iniciarCancion);
