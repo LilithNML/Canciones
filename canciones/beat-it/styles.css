@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  color: #fff;
+  background: linear-gradient(270deg, #1a1a40, #4b0082, #1a1a40);
+  background-size: 600% 600%;
+  animation: fondoMovil 20s ease infinite;
+  overflow: hidden;
+  height: 100vh;
+}
+
+@keyframes fondoMovil {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+#pantalla-inicial, #pantalla-cancion {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+.oculto {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mensaje {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  animation: aparecer 1s ease forwards;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mensaje h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.mensaje p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #e0e0ff;
+}
+
+button {
+  background: #ff3cac;
+  background: linear-gradient(to right, #784ba0, #2b86c5);
+  color: #fff;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #fff;
+}
+
+#audio {
+  display: none;
+}
+
+#letra-container {
+  width: 100%;
+  max-width: 900px;
+  height: 80vh;
+  margin: 0 auto;
+  overflow-y: auto;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  line-height: 2;
+  text-align: center;
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  animation: aparecer 1s ease forwards;
+  box-sizing: border-box;
+  animation: aparecer 1s ease forwards;
+}
+
+.linea {
+  opacity: 0.3;
+  transition: all 0.4s ease;
+  color: #ddd;
+}
+
+.linea.activa {
+  opacity: 1;
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .mensaje h1 {
+    font-size: 2rem;
+  }
+
+  .mensaje p {
+    font-size: 1rem;
+  }
+
+  button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  #letra-container {
+    font-size: 1rem;
+  }
+
+  .linea.activa {
+    font-size: 1.2rem;
+  }
+}
