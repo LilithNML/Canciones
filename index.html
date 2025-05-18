@@ -2,65 +2,54 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Nuestras Canciones</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
   <style>
     body {
-      margin: 0;
-      padding: 0;
       font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(135deg, #ffe0e9, #fff5d7);
+      background: #f0f0f0;
+      margin: 0;
+      padding: 2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       min-height: 100vh;
-      text-align: center;
     }
-
     h1 {
-      font-size: 2.5em;
-      color: #d6336c;
-      margin-bottom: 1em;
+      margin-bottom: 1.5rem;
+      color: #333;
     }
-
-    .canciones {
-      display: flex;
-      flex-direction: column;
-      gap: 1em;
-    }
-
-    .cancion-btn {
-      background-color: #f06292;
+    .boton-cancion {
+      background-color: #4a90e2;
       color: white;
       border: none;
-      padding: 1em 2em;
-      font-size: 1.1em;
-      border-radius: 10px;
+      padding: 1rem 2rem;
+      margin: 0.5rem;
+      border-radius: 8px;
       cursor: pointer;
+      font-size: 1.1rem;
       text-decoration: none;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s;
+      display: inline-block;
+      text-align: center;
+      width: 220px;
     }
-
-    .cancion-btn:hover {
-      background-color: #d81b60;
-    }
-
-    footer {
-      margin-top: 2em;
-      font-size: 0.9em;
-      color: #555;
+    .boton-cancion:hover {
+      background-color: #357abd;
     }
   </style>
 </head>
 <body>
-  <h1>Nuestras Canciones</h1>
-  <div class="canciones">
-    <a href="beat-it/" class="cancion-btn">Beat It</a>
-    <a href="cancion01/" class="cancion-btn">Otra Canción</a>
-    <!-- Agrega más canciones aquí -->
-  </div>
-  <footer>Con amor, siempre</footer>
+  <h1>Elige una canción para escuchar</h1>
+
+  <a href="canciones/beat-it/" class="boton-cancion">Beat It</a>
+  <a href="canciones/cancion01/" class="boton-cancion">Stripped - Rammstein</a>
+
 </body>
 </html>
