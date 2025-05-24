@@ -21,29 +21,25 @@ const pensamientos = [
 let index = 0;
 
 function mostrarPensamiento() {
-  if (index >= pensamientos.length) {
-    index = 0; // Repetir pensamientos si se acaban
-  }
+  if (index >= pensamientos.length) index = 0;
 
   const mensaje = document.createElement('div');
-  mensaje.classList.add('mensaje');
+  mensaje.className = 'mensaje';
   mensaje.textContent = pensamientos[index++];
 
-  // Posición aleatoria dentro del viewport
-  const padding = 40;
-  const x = Math.random() * (window.innerWidth - 200 - padding * 2) + padding;
-  const y = Math.random() * (window.innerHeight - 100 - padding * 2) + padding;
+  // Posición completamente aleatoria por la pantalla
+  const x = Math.random() * window.innerWidth;
+  const y = Math.random() * window.innerHeight;
+
   mensaje.style.left = `${x}px`;
   mensaje.style.top = `${y}px`;
 
   contenedor.appendChild(mensaje);
 
-  // Eliminar después de cierto tiempo
-  setTimeout(() => {
-    mensaje.remove();
-  }, 15000);
+  // Desaparecer luego de 15s
+  setTimeout(() => mensaje.remove(), 15000);
 }
 
-// Iniciar con uno y luego intervalos
+// Mostrar pensamientos de forma creciente
 mostrarPensamiento();
-setInterval(mostrarPensamiento, 2000);
+setInterval(mostrarPensamiento, 1500);
