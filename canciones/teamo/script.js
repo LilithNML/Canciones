@@ -1,44 +1,48 @@
-const canvas = document.getElementById("matrix");
-const ctx = canvas.getContext("2d");
+const contenedor = document.getElementById('contenedor');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// Mensajes/pensamientos que quieres mostrar
+const pensamientos = [
+  "Solo pienso en ti.",
+  "¿Dónde estarás ahora?",
+  "Tu sonrisa no sale de mi mente.",
+  "Cada instante contigo es mágico.",
+  "Siento tu abrazo aunque estés lejos.",
+  "Mi corazón late solo por ti.",
+  "Eres mi paz y mi tormenta.",
+  "Tu voz es mi melodía favorita.",
+  "Imagino nuestro futuro juntos.",
+  "Quisiera detener el tiempo a tu lado.",
+  "Nada más importa cuando pienso en ti.",
+  "Eres mi pensamiento constante.",
+  "Me haces sentir completo/a.",
+  "Cada detalle tuyo me enamora más.",
+  "Gracias por existir en mi vida.",
+];
 
-const frases = ["te amo", "mi vida", "mi amor", "mi princesa", "mi niño"];
-const fontSize = 32;
-const cantidad = 25;
+// Control para no saturar la pantalla
+const maxMensajesEnPantalla = 20;
+let index = 0;
 
-const lineas = Array.from({ length: cantidad }, () => ({
-  x: Math.random() * canvas.width,
-  y: Math.random() * canvas.height,
-  velocidad: 0.5 + Math.random(),
-  texto: frases[Math.floor(Math.random() * frases.length)]
-}));
-
-function dibujar() {
-  ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  ctx.fillStyle = "#00FF00";
-  ctx.font = fontSize + "px monospace";
-
-  for (let linea of lineas) {
-    ctx.fillText(linea.texto, linea.x, linea.y);
-    linea.y += linea.velocidad;
-
-    if (linea.y > canvas.height) {
-      linea.y = -fontSize;
-      linea.x = Math.random() * canvas.width;
-      linea.texto = frases[Math.floor(Math.random() * frases.length)];
-    }
+function mostrarMensaje() {
+  if(index >= pensamientos.length) {
+    index = 0; // Repetir ciclo
   }
 
-  requestAnimationFrame(dibujar);
+  const mensaje = document.createElement('div');
+  mensaje.classList.add('mensaje');
+  mensaje.textContent = pensamientos[index];
+  contenedor.appendChild(mensaje);
+
+  // Mantener solo un número máximo de mensajes
+  if (contenedor.children.length > maxMensajesEnPantalla) {
+    contenedor.removeChild(contenedor.firstChild);
+  }
+
+  index++;
 }
 
-dibujar();
+// Mostrar el primer mensaje inmediatamente
+mostrarMensaje();
 
-window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
+// Luego mostrar mensajes cada 2 segundos
+setInterval(mostrarMensaje, 2000);
