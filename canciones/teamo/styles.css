@@ -25,7 +25,6 @@ html, body {
   font-size: 1.2rem;
   color: #ffffffcc;
   opacity: 0;
-  transform: translate(0, 0); /* Ya no centramos con -50% */
   animation: aparecer 1.5s forwards;
   text-shadow: 0 0 6px #00ffc3;
   max-width: 40vw;
@@ -39,17 +38,10 @@ html, body {
 @keyframes aparecer {
   0% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.9);
+    transform: scale(0.9);
   }
   100% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
-
-@media (max-width: 600px) {
-  .mensaje {
-    font-size: 1rem;
-    max-width: 60vw;
+    transform: scale(1);
   }
 }
