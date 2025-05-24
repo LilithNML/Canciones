@@ -1,9 +1,70 @@
-body {
+/* Reset básico */
+* {
   margin: 0;
-  overflow: hidden;
-  background: black;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-canvas {
-  display: block;
+body, html {
+  height: 100%;
+  background: #121212; /* Fondo oscuro pero no negro puro */
+  color: #e0e0e0; /* Texto claro */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+main#contenedor {
+  width: 90%;
+  max-width: 600px;
+  height: 80vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  background: #1e1e1e; /* Fondo ligeramente más claro para el contenedor */
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0, 255, 100, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scrollbar-width: thin;
+  scrollbar-color: #00ff7f transparent;
+}
+
+/* Scroll para navegadores webkit */
+main#contenedor::-webkit-scrollbar {
+  width: 8px;
+}
+main#contenedor::-webkit-scrollbar-thumb {
+  background-color: #00ff7f;
+  border-radius: 10px;
+}
+
+/* Mensajes */
+.mensaje {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: aparecer 1s forwards;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  color: #00ff7f; /* Verde suave */
+  user-select: none;
+}
+
+/* Animación de aparición */
+@keyframes aparecer {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  main#contenedor {
+    height: 70vh;
+    font-size: 1rem;
+    padding: 15px;
+  }
 }
