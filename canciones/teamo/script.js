@@ -19,6 +19,16 @@ const pensamientos = [
 ];
 
 let index = 0;
+const mensajesActivos = [];
+
+function hayColision(rect1, rect2) {
+  return !(
+    rect1.right < rect2.left ||
+    rect1.left > rect2.right ||
+    rect1.bottom < rect2.top ||
+    rect1.top > rect2.bottom
+  );
+}
 
 function mostrarPensamiento() {
   if (index >= pensamientos.length) index = 0;
@@ -27,19 +37,44 @@ function mostrarPensamiento() {
   mensaje.className = 'mensaje';
   mensaje.textContent = pensamientos[index++];
 
-  // Posición completamente aleatoria por la pantalla
-  const x = Math.random() * window.innerWidth;
-  const y = Math.random() * window.innerHeight;
-
-  mensaje.style.left = `${x}px`;
-  mensaje.style.top = `${y}px`;
-
   contenedor.appendChild(mensaje);
+  mensaje.style.left = '0px';
+  mensaje.style.top = '0px';
 
-  // Desaparecer luego de 15s
-  setTimeout(() => mensaje.remove(), 15000);
+  const ancho = mensaje.offsetWidth;
+  const alto = mensaje.offsetHeight;
+  const margen = 20;
+
+  let intentos = 0;
+  let x, y;
+  let rectNuevo;
+  let colision;
+
+  do {
+    x = Math.random() * (window.innerWidth - ancho - margen * 2) + margen;
+    y = Math.random() * (window.innerHeight - alto - margen * 2) + margen;
+    mensaje.style.left = `${x}px`;
+    mensaje.style.top = `${y}px`;
+
+    rectNuevo = mensaje.getBoundingClientRect();
+    colision = mensajesActivos.some(r => hayColision(r, rectNuevo));
+
+    intentos++;
+  } while (colision && intentos < 100);
+
+  if (intentos >= 100) {
+    mensaje.remove();
+    return;
+  }
+
+  mensajesActivos.push(rectNuevo);
+
+  // Eliminar después de un tiempo y limpiar lista
+  setTimeout(() => {
+    mensaje.remove();
+    mensajesActivos.splice(mensajesActivos.indexOf(rectNuevo), 1);
+  }, 15000);
 }
 
-// Mostrar pensamientos de forma creciente
 mostrarPensamiento();
 setInterval(mostrarPensamiento, 1500);
