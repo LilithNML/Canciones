@@ -20,13 +20,15 @@ const pensamientos = [
 
 let index = 0;
 const mensajesActivos = [];
+const margenSeguridad = 20;
+const distanciaMinima = 60;
 
-function hayColision(rect1, rect2) {
+function hayColision(rect1, rect2, padding = distanciaMinima) {
   return !(
-    rect1.right < rect2.left ||
-    rect1.left > rect2.right ||
-    rect1.bottom < rect2.top ||
-    rect1.top > rect2.bottom
+    rect1.right + padding < rect2.left ||
+    rect1.left - padding > rect2.right ||
+    rect1.bottom + padding < rect2.top ||
+    rect1.top - padding > rect2.bottom
   );
 }
 
@@ -38,21 +40,14 @@ function mostrarPensamiento() {
   mensaje.textContent = pensamientos[index++];
 
   contenedor.appendChild(mensaje);
-  mensaje.style.left = '0px';
-  mensaje.style.top = '0px';
-
-  const ancho = mensaje.offsetWidth;
-  const alto = mensaje.offsetHeight;
-  const margen = 20;
 
   let intentos = 0;
-  let x, y;
-  let rectNuevo;
-  let colision;
+  let x, y, rectNuevo, colision;
 
   do {
-    x = Math.random() * (window.innerWidth - ancho - margen * 2) + margen;
-    y = Math.random() * (window.innerHeight - alto - margen * 2) + margen;
+    x = Math.random() * (window.innerWidth - 200 - margenSeguridad * 2) + margenSeguridad;
+    y = Math.random() * (window.innerHeight - 100 - margenSeguridad * 2) + margenSeguridad;
+
     mensaje.style.left = `${x}px`;
     mensaje.style.top = `${y}px`;
 
@@ -60,7 +55,7 @@ function mostrarPensamiento() {
     colision = mensajesActivos.some(r => hayColision(r, rectNuevo));
 
     intentos++;
-  } while (colision && intentos < 100);
+  } while ((colision || !estaDentroDePantalla(rectNuevo)) && intentos < 100);
 
   if (intentos >= 100) {
     mensaje.remove();
@@ -69,11 +64,20 @@ function mostrarPensamiento() {
 
   mensajesActivos.push(rectNuevo);
 
-  // Eliminar después de un tiempo y limpiar lista
   setTimeout(() => {
     mensaje.remove();
-    mensajesActivos.splice(mensajesActivos.indexOf(rectNuevo), 1);
+    const index = mensajesActivos.indexOf(rectNuevo);
+    if (index > -1) mensajesActivos.splice(index, 1);
   }, 15000);
+}
+
+function estaDentroDePantalla(rect) {
+  return (
+    rect.left >= 0 + margenSeguridad &&
+    rect.top >= 0 + margenSeguridad &&
+    rect.right <= window.innerWidth - margenSeguridad &&
+    rect.bottom <= window.innerHeight - margenSeguridad
+  );
 }
 
 mostrarPensamiento();
