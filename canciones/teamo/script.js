@@ -1,48 +1,49 @@
 const contenedor = document.getElementById('contenedor');
 
-// Mensajes/pensamientos que quieres mostrar
 const pensamientos = [
   "Solo pienso en ti.",
-  "¿Dónde estarás ahora?",
-  "Tu sonrisa no sale de mi mente.",
-  "Cada instante contigo es mágico.",
-  "Siento tu abrazo aunque estés lejos.",
-  "Mi corazón late solo por ti.",
-  "Eres mi paz y mi tormenta.",
-  "Tu voz es mi melodía favorita.",
-  "Imagino nuestro futuro juntos.",
-  "Quisiera detener el tiempo a tu lado.",
-  "Nada más importa cuando pienso en ti.",
-  "Eres mi pensamiento constante.",
-  "Me haces sentir completo/a.",
-  "Cada detalle tuyo me enamora más.",
-  "Gracias por existir en mi vida.",
+  "Tu voz vive en mi mente.",
+  "Tu nombre aparece en todos mis pensamientos.",
+  "No puedo dejar de imaginarte.",
+  "Me haces sonreír sin estar presente.",
+  "Eres mi primer pensamiento del día.",
+  "Y también el último.",
+  "Nada ni nadie ocupa tanto espacio en mí como tú.",
+  "Pienso en tus ojos todo el tiempo.",
+  "Imagino tu risa cuando cierro los ojos.",
+  "Estás en cada rincón de mi mente.",
+  "Te amo más de lo que sé decir.",
+  "Cada pensamiento tiene tu forma.",
+  "Eres mi universo interno.",
+  "No hay respiro sin pensarte.",
 ];
 
-// Control para no saturar la pantalla
-const maxMensajesEnPantalla = 20;
 let index = 0;
 
-function mostrarMensaje() {
-  if(index >= pensamientos.length) {
-    index = 0; // Repetir ciclo
+function mostrarPensamiento() {
+  if (index >= pensamientos.length) {
+    index = 0; // Repetir pensamientos si se acaban
   }
 
   const mensaje = document.createElement('div');
   mensaje.classList.add('mensaje');
-  mensaje.textContent = pensamientos[index];
+  mensaje.textContent = pensamientos[index++];
+
+  // Posición aleatoria dentro del viewport
+  const padding = 40;
+  const x = Math.random() * (window.innerWidth - 200 - padding * 2) + padding;
+  const y = Math.random() * (window.innerHeight - 100 - padding * 2) + padding;
+  mensaje.style.left = `${x}px`;
+  mensaje.style.top = `${y}px`;
+
   contenedor.appendChild(mensaje);
 
-  // Mantener solo un número máximo de mensajes
-  if (contenedor.children.length > maxMensajesEnPantalla) {
-    contenedor.removeChild(contenedor.firstChild);
-  }
-
-  index++;
+  // Eliminar después de cierto tiempo
+  setTimeout(() => {
+    mensaje.remove();
+  }, 15000);
 }
 
-// Mostrar el primer mensaje inmediatamente
-mostrarMensaje();
-
-// Luego mostrar mensajes cada 2 segundos
-setInterval(mostrarMensaje, 2000);
+// Iniciar con uno y luego intervalos
+mostrarPensamiento();
+setInterval(mostrarPensamiento, 2000);
